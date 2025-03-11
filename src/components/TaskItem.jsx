@@ -5,10 +5,13 @@ const TaskItem = ({
   task,
   toggleTaskCompletion,
   handleDeleteTask,
-  isEditing,
-  setEditingTaskId,
+  handleEditTask,
 }) => {
-  // Get due date status
+  const ucfirst = function (string) {
+    if (!string) return;
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   const getDueDateStatus = (dueDate) => {
     if (!dueDate) return null;
 
@@ -61,7 +64,7 @@ const TaskItem = ({
 
             {task.priority && (
               <span className={`task-priority priority-${task.priority}`}>
-                {task.priority}
+                {ucfirst(task.priority)}
               </span>
             )}
 
@@ -76,7 +79,7 @@ const TaskItem = ({
       </div>
 
       <div className="task-actions">
-        <button onClick={() => setEditingTaskId(task.id)} className="edit-btn">
+        <button onClick={() => handleEditTask(task)} className="edit-btn">
           <Edit2 size={16} />
         </button>
         <button
