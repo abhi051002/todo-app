@@ -141,6 +141,14 @@ const App = () => {
 
   // Clear all completed tasks
   const clearCompletedTasks = () => {
+    let completedTasks = 0;
+    tasks.map((task) => {
+      return task.completed ? completedTasks++ : 0;
+    });
+    if (completedTasks == 0) {
+      showNotification("No Completed tasks to be cleared", "error");
+      return;
+    }
     if (
       window.confirm("Are you sure you want to remove all completed tasks?")
     ) {
