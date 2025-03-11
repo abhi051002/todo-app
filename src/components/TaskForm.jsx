@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Calendar, ArrowDownCircle, Filter, Plus } from "lucide-react";
 
-const TaskForm = ({ categories, handleTaskSubmit, taskToEdit = null }) => {
+const TaskForm = ({
+  categories,
+  handleTaskSubmit,
+  taskToEdit = null,
+  resetTaskToEdit,
+}) => {
   const [inputValue, setInputValue] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [priority, setPriority] = useState("medium");
@@ -26,6 +31,11 @@ const TaskForm = ({ categories, handleTaskSubmit, taskToEdit = null }) => {
     setPriority("medium");
     setSelectedCategory("");
     setEditTaskId(null);
+
+    // Call the resetTaskToEdit function if it exists
+    if (resetTaskToEdit) {
+      resetTaskToEdit();
+    }
   };
 
   const onSubmit = (e) => {
