@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import TaskItem from "./TaskItem";
 
-const TaskList = ({ tasks, toggleTaskCompletion, handleDeleteTask }) => {
-  const [editingTaskId, setEditingTaskId] = useState(null);
-
+const TaskList = ({
+  tasks,
+  toggleTaskCompletion,
+  handleDeleteTask,
+  handleEditTask,
+}) => {
   if (tasks.length === 0) {
     return (
       <div className="no-tasks">
@@ -20,8 +23,7 @@ const TaskList = ({ tasks, toggleTaskCompletion, handleDeleteTask }) => {
           task={task}
           toggleTaskCompletion={toggleTaskCompletion}
           handleDeleteTask={handleDeleteTask}
-          isEditing={task.id === editingTaskId}
-          setEditingTaskId={setEditingTaskId}
+          handleEditTask={handleEditTask}
         />
       ))}
     </ul>
