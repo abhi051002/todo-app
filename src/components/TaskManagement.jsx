@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TaskForm from "./TaskForm";
 import SearchBar from "./SearchBar";
 import TaskList from "./TaskList";
@@ -14,9 +14,21 @@ const TaskManagement = ({
   filter,
   selectedCategory,
 }) => {
+  const [taskToEdit, setTaskToEdit] = useState(null);
+
+  const handleEditTask = (task) => {
+    setTaskToEdit(task);
+    // Scroll to the form
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <section className="task-management">
-      <TaskForm categories={categories} handleTaskSubmit={handleTaskSubmit} />
+      <TaskForm
+        categories={categories}
+        handleTaskSubmit={handleTaskSubmit}
+        taskToEdit={taskToEdit}
+        resetTaskToEdit={() => setTaskToEdit(null)}
+      />
 
       <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
@@ -31,9 +43,7 @@ const TaskManagement = ({
           tasks={tasks}
           toggleTaskCompletion={toggleTaskCompletion}
           handleDeleteTask={handleDeleteTask}
-          handleEditTask={(task) => {
-            // This will be handled by the TaskForm component directly
-          }}
+          handleEditTask={handleEditTask}
         />
       </div>
     </section>
